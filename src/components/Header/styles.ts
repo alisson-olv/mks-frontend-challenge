@@ -36,6 +36,8 @@ export const StyledCart = styled.div`
   background-color: #ffffff;
   border-radius: 8px;
 
+  cursor: pointer;
+
   display: flex;
   gap: 10px;
   align-items: center;

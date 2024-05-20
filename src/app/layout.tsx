@@ -19,8 +19,12 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className={montserrat.className}>
-        <Header numberOfProducts={0} />
-        <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+        <StyledComponentsRegistry>
+          <>
+            <Header numberOfProducts={0} />
+            {children}
+          </>
+        </StyledComponentsRegistry>
       </body>
     </html>
   );
