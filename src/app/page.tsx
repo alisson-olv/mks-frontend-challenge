@@ -1,24 +1,22 @@
-import getProducts from "@/actions/get-products";
+'use client'
 import CardProduct from "@/components/CardProduct";
+import Cart from "@/components/Cart";
+import SkeletonCardProduct from "@/components/SkeletonCardProduct";
+import { useCart } from "@/context/CartContext";
+import useProducts from "@/hooks/UseProducts";
 
-export default async function Home() {
-  const result = await getProducts();
+export default function Home() {
+  const { products, loading, error } = useProducts();
+  const { isVisible } = useCart();
 
-  // Check if result exists and has data
-  if (!result || !result.data) {
-    console.error("Failed to fetch products");
-    return (
-      <main style={{ backgroundColor: '#f9f9f9' }}>
-        <p>Failed to load products.</p>
-      </main>
-    );
-  }
-
-  const { data } = result;
-
+  if (error) return <><p>{error}</p></>
   return (
     <main className="home">
-      {data?.products.map((product) => (
+      {isVisible && <Cart />}
+
+      {loading && <SkeletonCardProduct cards={8} />}
+
+      {products?.map((product) => (
         <CardProduct key={product.id} product={product} />
       ))}
     </main>

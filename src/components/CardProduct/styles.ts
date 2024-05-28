@@ -2,6 +2,8 @@ import styled from 'styled-components';
 
 export const StyledCardWrapper = styled.div`
   width: 218px;
+  border-radius: 8px 8px 0 0;
+  background-color: #ffffff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.13);
   display: flex;
   flex-direction: column;
@@ -13,10 +15,7 @@ export const StyledCardWrapper = styled.div`
 `;
 
 export const StyledCard = styled.div`
-  background-color: #ffffff;
-  border-radius: 8px 8px 0 0;
   padding: 14px;
-
   display: flex;
   justify-content: space-between;
   flex-direction: column;
@@ -27,11 +26,6 @@ export const StyledCardImage = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-
-  img {
-    max-width: 100%;
-    height: auto;
-  }
 `;
 
 export const StyledCardAndPrice = styled.div`
