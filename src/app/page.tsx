@@ -3,7 +3,9 @@ import CardProduct from "@/components/CardProduct";
 import Cart from "@/components/Cart";
 import SkeletonCardProduct from "@/components/SkeletonCardProduct";
 import { useCart } from "@/context/CartContext";
-import useProducts from "@/hooks/UseProducts";
+import useProducts from "@/hooks/UseProducts"
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Home() {
   const { products, loading, error } = useProducts();
@@ -11,14 +13,17 @@ export default function Home() {
 
   if (error) return <><p>{error}</p></>
   return (
-    <main className="home">
-      {isVisible && <Cart />}
+    <>
+      <ToastContainer />
+      <main className="home">
+        {isVisible && <Cart />}
 
-      {loading && <SkeletonCardProduct cards={8} />}
+        {loading && <SkeletonCardProduct cards={8} />}
 
-      {products?.map((product) => (
-        <CardProduct key={product.id} product={product} />
-      ))}
-    </main>
+        {products?.map((product) => (
+          <CardProduct key={product.id} product={product} />
+        ))}
+      </main>
+    </>
   );
 }

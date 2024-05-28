@@ -2,6 +2,7 @@
 import { CartItem } from '@/types/cart';
 import { Product } from '@/types/product';
 import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
+import { Bounce, toast } from 'react-toastify';
 
 interface CartContextType {
   cartItems: CartItem[];
@@ -31,6 +32,20 @@ export default function CartProvider({ children }: CartProviderProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [hydrated, setHydrated] = useState(false);
+
+  const notify = ({ message, type }: { message: string, type: "success" | "error" }) => {
+    toast(message, {
+      position: "bottom-left",
+      autoClose: 2000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+      type: type,
+    })
+  };
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -77,6 +92,7 @@ export default function CartProvider({ children }: CartProviderProps) {
 
   function removeProduct(productId: number) {
     setCartItems((prevItems) => prevItems.filter((item) => item.id !== productId));
+    notify({ message: 'Item removido do carrinho', type: 'success' });
   };
 
   function closeCart() {

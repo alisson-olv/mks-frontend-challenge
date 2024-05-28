@@ -5,7 +5,7 @@ import { Product } from '@/types/product'
 import Image from 'next/image';
 import ShoppingBagIcon from '@/icons/shopping-bag-icon';
 import { useCart } from '@/context/CartContext';
-import Skeleton from 'react-loading-skeleton';
+import { Bounce, toast } from 'react-toastify';
 
 interface ProductProps {
   product: Product;
@@ -14,8 +14,22 @@ interface ProductProps {
 export default function CardProduct({ product }: ProductProps) {
   const { addProduct } = useCart();
 
+  function notify() {
+    toast.success("Item adicionado ao carrinho", {
+      position: "bottom-left",
+      autoClose: 2000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+    })
+  };
+
   const handleAddToCart = () => {
     addProduct(product);
+    notify();
   };
 
   return (
